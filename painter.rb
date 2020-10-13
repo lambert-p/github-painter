@@ -3,9 +3,7 @@
 require 'rugged'
 require 'date'
 
-# EMAIL = ENV['GIT_COMITTER_EMAIL']
-# USERNAME = ENV['GIT_COMMITTER_NAME']
-
+# TODO Switch to using argv maybe
 EMAIL = "paul.lambert@linux.com"
 USERNAME = "Paul Lambert"
 PATH = "/home/paul/code/fake-commits"
@@ -15,9 +13,9 @@ repo = Rugged::Repository.new(PATH)
 
 NUM_PAST_DAYS.times do |x|
 
-  time_stamp = Time.now - x*24*60*60 
+  time_stamp = Time.now - x*24*60*60
 
-  if time_stamp.saturday? 
+  if time_stamp.saturday?
     daily_commits = rand(0..6)
   elsif time_stamp.sunday?
     daily_commits = rand(0..3)
