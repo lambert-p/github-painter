@@ -17,7 +17,7 @@ NUM_PAST_DAYS.times do |x|
 
   time_stamp = Time.now - x*24*60*60 
 
-  if time_stamp.saturday? || time_stamp.sunday?
+  if time_stamp.saturday? 
     daily_commits = rand(0..6)
   elsif time_stamp.sunday?
     daily_commits = rand(0..3)
