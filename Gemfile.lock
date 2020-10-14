@@ -1,0 +1,14 @@
+GEM
+  specs:
+    rugged (1.0.1)
+    yaml (0.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rugged
+  yaml
+
+BUNDLED WITH
+   2.1.4

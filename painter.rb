@@ -1,13 +1,17 @@
 #!/usr/bin/env ruby
 
-require 'rugged'
 require 'date'
+require 'rugged'
+require 'yaml'
 
-# TODO Switch to using argv maybe
-EMAIL = "paul.lambert@linux.com"
-USERNAME = "Paul Lambert"
-PATH = "/home/paul/code/fake-commits"
-NUM_PAST_DAYS = 365*6 # six years of history
+# Load in user config
+
+yaml_config_opts = YAML.load_file('./config.yml')
+EMAIL = yaml_config_opts["gh_email"]
+USERNAME = yaml_config_opts["gh_username"]
+PATH = yaml_config_opts["path"] 
+NUM_PAST_DAYS = yaml_config_opts["num_days"].to_i
+
 
 repo = Rugged::Repository.new(PATH)
 
@@ -46,7 +50,7 @@ NUM_PAST_DAYS.times do |x|
       :time => time_stamp
     }
 
-    options[:message] ||= "Making a commit via Rugged!"
+    options[:message] ||= "Making a commit at #{time_stamp}"
     options[:parents] = repo.empty? ? [] : [ repo.head.target ].compact
     options[:update_ref] = 'HEAD'
 
