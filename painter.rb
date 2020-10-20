@@ -9,7 +9,7 @@ require 'yaml'
 yaml_config_opts = YAML.load_file('./config.yml')
 EMAIL = yaml_config_opts["gh_email"]
 USERNAME = yaml_config_opts["gh_username"]
-PATH = yaml_config_opts["path"] 
+PATH = yaml_config_opts["path"]
 NUM_PAST_DAYS = yaml_config_opts["num_days"].to_i
 
 
@@ -34,6 +34,7 @@ NUM_PAST_DAYS.times do |x|
     index = repo.index
     index.read_tree(repo.head.target.tree)
     index.add(:path => "phony-dates.md", :oid=>oid, :mode=>0100644)
+    index.write()
 
     options = {}
     options[:tree] = index.write_tree(repo)
